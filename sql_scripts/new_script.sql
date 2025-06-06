@@ -1,0 +1,3 @@
+SELECT * FROM PLAYGROUND.DATATHON.DRIVERS;
+
+-- Results and races
