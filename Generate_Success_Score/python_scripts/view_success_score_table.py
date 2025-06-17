@@ -15,8 +15,8 @@ selected_race = st.sidebar.selectbox("Select Race", sorted(race_ids))
 
 # Sidebar: Column Selection with safe default
 default_cols = [col for col in [
-    'RACEID', 'DRIVERID', 'GRID', 'POINTS', 'LAPS',
-    'ESTIMATED_FINISH_TIME_STR', 'ML_SUCCESS_SCORE'
+    'DRIVERID', 'LAPS', 'POSITION',
+    'ESTIMATED_FINISH_TIME_STR', 'ML_SUCCESS_SCORE', 'STATUS'
 ] if col in all_columns]
 
 selected_cols = st.sidebar.multiselect(

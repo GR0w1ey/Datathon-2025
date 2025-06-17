@@ -46,7 +46,7 @@ def generate_success_scores():
 
         # Base score based strictly on finishing order
         n = len(group)
-        base_scores = np.linspace(100, 40, num=n)  # hard-coded descending line
+        base_scores = np.linspace(100, 0, num=n)  # hard-coded descending line
         group['ML_SUCCESS_SCORE'] = base_scores * group['ML_INFLUENCE']
 
         # Re-enforce strict order so no one scores higher than someone ahead
