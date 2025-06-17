@@ -2,7 +2,7 @@ import pandas as pd
 
 def clean_estimated_times():
     # Load the dataset
-    df = pd.read_csv("csv_files/race_results_2024_with_estimated_times.csv")
+    df = pd.read_csv("Generate_Success_Score/csv_files/race_results_2024_with_estimated_times.csv")
 
     # Drop the original finish time columns
     df = df.drop(columns=['FINISH_TIME_INT_SEC', 'FINISH_TIME_STR'])
@@ -30,7 +30,7 @@ def clean_estimated_times():
     df = df[ordered_cols]
 
     # Save to new CSV
-    df.to_csv("csv_files/race_results_2024_cleaned_with_estimated_times.csv", index=False)
+    df.to_csv("Generate_Success_Score/csv_files/race_results_2024_cleaned_with_estimated_times.csv", index=False)
 
     # Preview
     # print(df.head())

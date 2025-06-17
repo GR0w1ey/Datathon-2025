@@ -2,7 +2,7 @@ import pandas as pd
 
 def estimate_finish_times():
     # Load the dataset
-    df = pd.read_csv("csv_files/race_results_2024_with_finish_times.csv")
+    df = pd.read_csv("Generate_Success_Score/csv_files/race_results_2024_with_finish_times.csv")
 
     # Convert FINISH_TIME_INT_SEC to float seconds
     df['FINISH_TIME_INT_SEC'] = pd.to_timedelta(df['FINISH_TIME_INT_SEC']).dt.total_seconds()
@@ -50,7 +50,7 @@ def estimate_finish_times():
     df = df.drop(columns=['MAX_LAPS'])
 
     # Save full table with new columns
-    df.to_csv("csv_files/race_results_2024_with_estimated_times.csv", index=False)
+    df.to_csv("Generate_Success_Score/csv_files/race_results_2024_with_estimated_times.csv", index=False)
 
     # Preview
     # print(df[['RACEID', 'DRIVERID', 'STATUS', 'ESTIMATED_FINISH_TIME', 'ESTIMATED_FINISH_TIME_STR']].head())
