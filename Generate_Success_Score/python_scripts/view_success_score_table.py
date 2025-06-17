@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 
 # Load the CSV
-df = pd.read_csv("csv_files/race_results_2024_with_success_score.csv")
+df = pd.read_csv("Generate_Success_Score/csv_files/race_results_2024_with_success_score.csv")
 
 st.title("🏁 F1 Success Score Viewer")
 
@@ -35,5 +35,5 @@ else:
 
 
 # Use below in terminal to view table
-# streamlit run python_scripts/view_success_score_table.py
+# streamlit run Generate_Success_Score/python_scripts/view_success_score_table.py
 
