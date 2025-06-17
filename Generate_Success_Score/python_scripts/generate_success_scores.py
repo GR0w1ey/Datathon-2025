@@ -4,7 +4,7 @@ import lightgbm as lgb
 from sklearn.preprocessing import MinMaxScaler
 
 def generate_success_scores():
-    df = pd.read_csv("csv_files/race_results_2024_cleaned_with_estimated_times.csv")
+    df = pd.read_csv("Generate_Success_Score/csv_files/race_results_2024_cleaned_with_estimated_times.csv")
 
     # Prep
     df['ESTIMATED_FINISH_TIME'] = pd.to_numeric(df['ESTIMATED_FINISH_TIME'], errors='coerce')
@@ -46,7 +46,7 @@ def generate_success_scores():
 
         # Base score based strictly on finishing order
         n = len(group)
-        base_scores = np.linspace(100, 40, num=n)  # hard-coded descending line
+        base_scores = np.linspace(100, 0, num=n)  # hard-coded descending line
         group['ML_SUCCESS_SCORE'] = base_scores * group['ML_INFLUENCE']
 
         # Re-enforce strict order so no one scores higher than someone ahead
@@ -69,4 +69,4 @@ def generate_success_scores():
         'ESTIMATED_FINISH_TIME', 'ESTIMATED_FINISH_TIME_STR', 'ML_SUCCESS_SCORE'
     ]
     df = df[[col for col in col_order if col in df.columns]]
-    df.to_csv("csv_files/race_results_2024_with_success_score.csv", index=False)
+    df.to_csv("Generate_Success_Score/csv_files/race_results_2024_with_success_score.csv", index=False)
