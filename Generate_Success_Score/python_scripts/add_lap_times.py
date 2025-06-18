@@ -2,7 +2,7 @@ import pandas as pd
 
 def add_lap_times():
     # Load the CSV
-    df = pd.read_csv("Generate_Success_Score/csv_files/02_lap_times_2024.csv")
+    df = pd.read_csv("Generate_Success_Score/csv_files/02_lap_times_1999_2024.csv")
 
     # Convert all TIME values to string
     df['TIME'] = df['TIME'].astype(str)
@@ -51,7 +51,7 @@ def add_lap_times():
     final = final.sort_values(by=['RACEID', 'POSITION'])
 
     # Save to CSV
-    final.to_csv("Generate_Success_Score/csv_files/driver_finish_times_2024.csv", index=False)
+    final.to_csv("Generate_Success_Score/csv_files/driver_finish_times_1999_2024.csv", index=False)
 
     # Optional preview
     # print(final.head())
