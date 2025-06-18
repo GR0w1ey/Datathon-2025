@@ -23,7 +23,7 @@ def main():
     print("Step 6: Calculating the success score...\n")
     generate_success_scores()
 
-    print("\n✅ All steps completed successfully.\n")
+    print("\nAll steps completed successfully.\n")
 
 if __name__ == "__main__":
     main()
