@@ -1,3 +1,5 @@
+-- Visualisation 1
+
 -- query for line graph showing the 2024 average Lap times during the 3 qualifying sessions for the McLaren Mercedes drivers (Lando Norris and Oscar Piastri) and Red Bull drivers (Max Verstappen and Sergio Perez), what to do if a driver failed to make it into Q3? (i.e. Lando Norris for Azerbaijan Grand Prix
 
 SELECT race.name as race_name, driver.driverid, quali.position, quali.q1, quali.q2, quali.q3
@@ -24,6 +26,8 @@ ORDER BY race.raceid;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+-- Visualisation 2
+
 -- stacked bar graph indicating the number of 1st place finishes, 2nd place finishes, 3rd place finishes, 4th place finishes, 5th place finishes, 6th place finishes, 7th place finishes, 8th place finishes, 9th place finishes and 10th place finishes that McLaren Mercedes had and Red Bull had in the 2024 season
 
 SELECT res.constructorid, res.positiontext, COUNT(res.positiontext) AS number_of_places_finished
@@ -47,6 +51,8 @@ GROUP BY res.driverid, res.positiontext, res.position
 ORDER BY res.driverid, res.position;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Visualisation 3
 
 -- line graph showing the best finish at each race every team who McLaren were competing against between 2022-2024 (this is because this was when the new regulations were introduced)
 
