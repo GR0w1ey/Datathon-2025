@@ -4,7 +4,7 @@ import pandas as pd
 # Load the CSV
 df = pd.read_csv("Generate_Success_Score/csv_files/race_results_1999_2024_with_success_score.csv")
 
-st.title("🏁 F1 Success Score Viewer")
+st.title("F1 Success Score Viewer")
 
 # Detect all available columns
 all_columns = df.columns.tolist()

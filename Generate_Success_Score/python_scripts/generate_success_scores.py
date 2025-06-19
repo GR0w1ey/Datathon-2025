@@ -12,7 +12,7 @@ def generate_success_scores():
     df['ESTIMATED_FINISH_TIME_STR'] = pd.to_timedelta(df['ESTIMATED_FINISH_TIME'], unit='s').astype(str).str.replace("0 days ", "", regex=False)
 
     # Features to feed to ML
-    features = ['GRID', 'POINTS', 'LAPS', 'FASTESTLAPSPEED', 'ESTIMATED_FINISH_TIME']
+    features = ['GRID', 'LAPS', 'FASTESTLAPSPEED', 'ESTIMATED_FINISH_TIME']
     df[features] = df[features].fillna(0)
 
     # Define ranking label based on true finish order
