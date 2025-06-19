@@ -10,18 +10,6 @@ WHERE quali.driverid in (846, 857, 830, 815)
 AND race.year = 2024
 ORDER BY race.raceid;
 
--- Alternatively tried this but TO_TIME only produces '00:01:30' instead of expected '01:30.438':
-
--- SELECT race.name as race_name, driver.driverid, quali.position, quali.q1 AS original_q1, TRY_TO_TIME(quali.q1, 'MI:SS.FF3') as q1, quali.q2 as original_q2, TRY_TO_TIME(quali.q2, 'MI:SS.FF3') as q2, quali.q3 as original_q3, TRY_TO_TIME(quali.q3, 'MI:SS.FF3') as q3
--- FROM PLAYGROUND.DATATHON.RACES AS race
--- JOIN PLAYGROUND.DATATHON.QUALIFYING quali ON quali.RACEID = race.RACEID
--- JOIN PLAYGROUND.DATATHON.DRIVERS driver ON driver.driverid = quali.driverid
--- WHERE quali.driverid in (846, 857, 830, 815)
--- AND race.year = 2024
--- ORDER BY race.raceid;
-
--- - RESULTS table has a milliseconds column but that refers to the overall race time (TIME column) rather than FASTESTLAPTIME column which would be more insightful
-
 -- - can also do the same for the race lap times as well but I would argue qualifying is more insightful as qualifying sessions mean every team is pushing their car to get the fastest time possible whereas race lap times are not necessarily indicative of having the fastest car during the race due to multiple factors (tyre choices, time spent behind traffic, any damage to the car etc)
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -58,10 +46,50 @@ ORDER BY res.driverid, res.position;
 
 -- this will therefore show McLaren Mercedes, Red Bull Racing, Ferrari, Mercedes, Alpine Renault, Aston Martin
 
-SELECT race.year, race.round, constuct.name, con_stand.constructorid, con_stand.points, con_stand.position
+SELECT race.year, race.round, constuct.name, con_results.points
 FROM PLAYGROUND.DATATHON.RACES AS race
-JOIN PLAYGROUND.DATATHON.CONSTRUCTOR_STANDINGS con_stand ON con_stand.RACEID = race.RACEID
-JOIN PLAYGROUND.DATATHON.CONSTRUCTORS constuct ON constuct.constructorid = con_stand.constructorid
+JOIN PLAYGROUND.DATATHON.CONSTRUCTOR_RESULTS con_results ON con_results.RACEID = race.RACEID
+JOIN PLAYGROUND.DATATHON.CONSTRUCTORS constuct ON constuct.constructorid = con_results.constructorid
 WHERE race.year IN (2022, 2023, 2024)
-AND con_stand.constructorid IN (1, 6, 9, 117, 131, 214)
-ORDER BY con_stand.raceid, con_stand.position, con_stand.constructorid;
+AND con_results.constructorid IN (1, 6, 9, 117, 131, 214)
+ORDER BY con_results.raceid, con_results.points DESC;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Visualisation 4
+
+-- line graph to show the best performing team in each race between 2014-2024 using Mark's ML success score algorithm
+
+WITH constructor_success_score AS (
+    SELECT res.raceid, res.constructorid, SUM(res.ml_success_score) as ml_success_score
+    FROM EVENT.DATATHON_2025_TEAM_ALPHA.RACE_RESULTS_1999_2024_WITH_SUCCESS_SCORE as res
+    WHERE res.raceid IN (SELECT raceid FROM PLAYGROUND.DATATHON.RACES WHERE YEAR IN (2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024))
+    GROUP BY res.raceid, res.constructorid
+    ORDER BY res.raceid
+)
+
+SELECT res.raceid, race.year, race.round, constructor.name, res.ml_success_score
+FROM constructor_success_score as res
+JOIN PLAYGROUND.DATATHON.CONSTRUCTORS as constructor ON constructor.constructorid = res.constructorid
+JOIN PLAYGROUND.DATATHON.RACES as race ON race.raceid = res.raceid
+WHERE (res.raceid, res.ml_success_score) IN (SELECT raceid, MAX(ml_success_score) FROM constructor_success_score GROUP BY raceid);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+-- Visualisation 5
+
+-- bar graph comparing the success score average between McLaren's 1999 constructor winning season to 2024 constructor winning season
+
+WITH mclaren_winning_season_comparison AS (
+    SELECT res.raceid, SUM(res.ml_success_score) AS ml_success_score
+    FROM EVENT.DATATHON_2025_TEAM_ALPHA.RACE_RESULTS_1999_2024_WITH_SUCCESS_SCORE as res
+    WHERE res.raceid IN (SELECT raceid FROM PLAYGROUND.DATATHON.RACES WHERE YEAR IN (1999, 2024))
+    AND res.constructorid = 1 -- McLaren
+    GROUP BY res.raceid
+    ORDER BY res.raceid
+)
+
+SELECT race.year, TO_DECIMAL(AVG(res.ml_success_score)) as average_success_across_the_season
+FROM mclaren_winning_season_comparison as res
+JOIN PLAYGROUND.DATATHON.RACES as race ON race.raceid = res.raceid
+GROUP BY race.year;
