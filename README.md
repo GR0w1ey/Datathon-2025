@@ -5,8 +5,8 @@
 ## Part A: Snowflake/Data Setup
 
 1. Create your own tables in the playground: What table do we need for the model? what is x (what features?) and what is y (success score vs POSITION column vs ranking?) Choose measure of success (do we need it? isnt the 'winning' the true measure?)
-2. Drop columns join columns, cleanse and shape the data to best suit your needs 
-*OPTIONAL*: use Beautiful Soup to web scrape and enrich your data, using this Task brief, F1 main website and judging criteria to guide your selection 
+2. Drop columns join columns, cleanse and shape the data to best suit your needs 
+(*OPTIONAL*: use Beautiful Soup to web scrape and enrich your data, using this Task brief, F1 main website and judging criteria to guide your selection) 
 
 ## Part B: Winning Factor Correlation Model 
 
