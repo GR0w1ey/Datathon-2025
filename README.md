@@ -15,5 +15,3 @@
 3. You can use Python natively in Snowflake or you can export your data to a preferred IDE. 
 4. Perform exploratory data analysis (EDA).
 5. Conduct factor analysis, to identify the extent to which pole gap, lap time and location, contribute to success, to identify which of these factors, most influence the race outcome.  (e.g., using Random Forest or Linear Regression).
-
-
