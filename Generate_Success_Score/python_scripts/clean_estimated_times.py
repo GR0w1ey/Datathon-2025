@@ -32,5 +32,3 @@ def clean_estimated_times():
     # Save to new CSV
     df.to_csv("Generate_Success_Score/csv_files/race_results_1999_2024_cleaned_with_estimated_times.csv", index=False)
 
-    # Preview
-    # print(df.head())

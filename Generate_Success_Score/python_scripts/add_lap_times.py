@@ -18,13 +18,12 @@ def add_lap_times():
     df['TIME'] = df['TIME'].apply(fix_time_format)
 
     # Check for any remaining invalid formats
-    # bad_rows = df[~df['TIME'].str.match(r'^\d{2}:\d{2}\.\d{3}$', na=False)]
     bad_rows = df[~df['TIME'].str.match(r'^\d{1,2}:\d{2}\.\d{3}$', na=False)]
 
     if not bad_rows.empty:
-        print(f"⚠️ Found {len(bad_rows)} rows with invalid TIME format.")
+        print(f"Found {len(bad_rows)} rows with invalid TIME format.")
         print(bad_rows[['RACEID', 'DRIVERID', 'TIME']].head(10))
-        print("❌ Script stopped due to invalid TIME values.")
+        print("Script stopped due to invalid TIME values.")
         return
 
     # Convert TIME to timedelta
@@ -53,5 +52,3 @@ def add_lap_times():
     # Save to CSV
     final.to_csv("Generate_Success_Score/csv_files/driver_finish_times_1999_2024.csv", index=False)
 
-    # Optional preview
-    # print(final.head())

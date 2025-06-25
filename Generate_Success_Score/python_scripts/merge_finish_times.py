@@ -11,5 +11,4 @@ def merge_finish_times():
     # Save to new CSV
     merged_df.to_csv("Generate_Success_Score/csv_files/race_results_1999_2024_with_finish_times.csv", index=False)
 
-    # Optional: preview merged data
-    # print(merged_df.head())
+

@@ -54,5 +54,4 @@ def estimate_finish_times():
     # Save full table with new columns
     df.to_csv("Generate_Success_Score/csv_files/race_results_1999_2024_with_estimated_times.csv", index=False)
 
-    # Preview
-    # print(df[['RACEID', 'DRIVERID', 'STATUS', 'ESTIMATED_FINISH_TIME', 'ESTIMATED_FINISH_TIME_STR']].head())
+
