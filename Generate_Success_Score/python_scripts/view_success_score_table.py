@@ -35,5 +35,5 @@ else:
 
 
 # Use below in terminal to view table
-# streamlit run Generate_Success_Score/python_scripts/view_success_score_table.py
+# streamlit run Generate_Success_Score/python_scripts/success_score_utils.py
 
